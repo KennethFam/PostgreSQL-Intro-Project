@@ -1,0 +1,26 @@
+{
+  "name": "postgresql-intro-project",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KennethFam/PostgreSQL-Intro-Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KennethFam/PostgreSQL-Intro-Project/issues"
+  },
+  "homepage": "https://github.com/KennethFam/PostgreSQL-Intro-Project#readme",
+  "description": "",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "express-validator": "^7.2.1",
+    "pg": "^8.16.0"
+  }
+}
