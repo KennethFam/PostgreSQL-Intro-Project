@@ -1,4 +1,5 @@
 const { body, validationResult } = require("express-validator");
+const db = require("../models/queries");
 
 const emptUserErr = "must not be blank."
 
@@ -8,15 +9,17 @@ const validateUser = [
 ]
 
 module.exports = {
-    getUsers: (req, res) => {
-        console.log("usernames will be logged here - wip");
+    getUsers: async (req, res) => {
+        const usernames = await db.getAllUsernames();
+        console.log("Usernames: ", usernames);
+        res.send("Usernames: " + usernames.map(user => user.username).join(", "));
     },
     getUserForm: (req, res) => {
         res.render("createUser", {title: "Add User"})
     },
     postNewUser: [
         validateUser, 
-        (req, res) => {
+        async (req, res) => {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 return res.status(400).render("createUser", {
@@ -24,7 +27,8 @@ module.exports = {
                     errors: errors.array()
                 });
             }
-            console.log("username to be saved: ", req.body.username)
+            const { username } = req.body;
+            await db.insertUsername(username);
             res.redirect("/");
         }
     ]
