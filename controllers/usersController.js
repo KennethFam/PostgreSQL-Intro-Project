@@ -10,9 +10,14 @@ const validateUser = [
 
 module.exports = {
     getUsers: async (req, res) => {
-        const usernames = await db.getAllUsernames();
-        console.log("Usernames: ", usernames);
-        res.send("Usernames: " + usernames.map(user => user.username).join(", "));
+        var usernames = "";
+        if (req.query.search) {
+            usernames = await db.searchUser(req.query.search);
+        } else {
+            usernames = await db.getAllUsernames();
+        }
+        console.log("Username(s): ", usernames);
+        res.send("Username(s): " + usernames.map(user => user.username).join(", "));
     },
     getUserForm: (req, res) => {
         res.render("createUser", {title: "Add User"})
@@ -31,5 +36,9 @@ module.exports = {
             await db.insertUsername(username);
             res.redirect("/");
         }
-    ]
+    ],
+    deleteAllUsers: async (req, res) => {
+        await db.deleteAllUsers();
+        res.redirect("/");
+    }
 };

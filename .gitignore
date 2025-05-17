@@ -1,2 +1,5 @@
 # ignore node_modules for commits
 node_modules/
+
+# ignore all environment files
+*.env
