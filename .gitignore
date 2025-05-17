@@ -1,0 +1,2 @@
+# ignore node_modules for commits
+node_modules/
